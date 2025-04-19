@@ -1,0 +1,16 @@
+# Top Interview 150 88. Merge Sorted Array
+class Solution(object):
+    def merge(self, nums1, m, nums2, n):
+        """
+        :type nums1: List[int]
+        :type m: int
+        :type nums2: List[int]
+        :type n: int
+        :rtype: None Do not return anything, modify nums1 in-place instead.
+        """
+        # merge nums1 and nums2,and then sort it.
+        merged_array = sorted(nums1[:m] + nums2)
+    
+        # the final sorted array
+        for i in range(m + n):
+            nums1[i] = merged_array[i]
