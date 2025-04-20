@@ -75,3 +75,29 @@ def majorityElement(nums):
 nums = [2,2,1,1,1,2,2,2]
 majority = majorityElement(nums)
 print(majority)
+
+# 121. Best Time to Buy and Sell Stock
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        min_price = float('inf')
+        max_profit = 0
+
+        for price in prices:
+          # if price < min_price, update min_price
+          if price < min_price:
+            min_price = price
+          # if price - min_price > max_profit, then update max_profit
+          elif price - min_price > max_profit:
+            max_profit = price - min_price
+
+        return max_profit
+
+prices = [7,1,5,3,6,4]
+
+solution = Solution()
+
+print(solution.maxProfit(prices))
