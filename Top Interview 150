@@ -59,3 +59,19 @@ k = solution.removeDuplicates(nums)
 
 print("k =", k)
 print("Updated nums =", nums[:k]) 
+
+# 169. Majority Element
+# Boyer-Moore Voting Algorithm
+def majorityElement(nums):
+    count = 0
+    majority = None
+
+    for num in nums:
+        if count == 0:
+            majority = num
+        count += (1 if num == majority else -1)
+
+    return majority
+nums = [2,2,1,1,1,2,2,2]
+majority = majorityElement(nums)
+print(majority)
