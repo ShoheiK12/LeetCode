@@ -244,3 +244,24 @@ class Solution:
 sol = Solution()
 print(sol.isSubsequence("ace", "abcde"))  # True
 print(sol.isSubsequence("aec", "abcde"))  # False
+
+# 383 Randsom Note
+class Solution(object):
+    def canConstruct(self, ransomNote, magazine):
+        # count how many times does the char emerges
+        from collections import Counter
+
+        ransom_count = Counter(ransomNote)
+        magazine_count = Counter(magazine)
+
+        for char in ransom_count:
+            # if ransomeNote is longer than magazine, it will return False.
+            # if char is not in magazine, ti will return 0.
+            if ransom_count[char] > magazine_count.get(char, 0):
+                return False
+        return True
+
+solution = Solution()
+print(solution.canConstruct("a", "b"))          
+print(solution.canConstruct("aa", "ab"))        
+print(solution.canConstruct("aa", "aab"))
