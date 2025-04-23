@@ -265,3 +265,36 @@ solution = Solution()
 print(solution.canConstruct("a", "b"))          
 print(solution.canConstruct("aa", "ab"))        
 print(solution.canConstruct("aa", "aab"))
+
+# Isomorphic Strings
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        # if the length of s is not equal to t, it must not be isomorphic
+        if len(s) != len(t):
+            return False
+
+        # set up dictionary for s to t and t to s so that you can check both directions(s->t and t->s)
+        s_dict = {}  
+        t_dict = {}  
+
+        for char_s, char_t in zip(s, t):
+            # check mapping from s to t
+            if char_s in s_dict:
+                if s_dict[char_s] != char_t:
+                    return False
+            else:
+                s_dict[char_s] = char_t
+
+            # check mapping from t to s
+            if char_t in t_dict:
+                if t_dict[char_t] != char_s:
+                    return False
+            else:
+                t_dict[char_t] = char_s
+
+        return True
+
+sol = Solution()
+print(sol.isIsomorphic("egg", "add"))    
+print(sol.isIsomorphic("foo", "bar"))     
+print(sol.isIsomorphic("paper", "title")) 
