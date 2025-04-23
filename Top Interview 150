@@ -31,6 +31,24 @@ class Solution(object):
         return k
 
 nums = [3,2,2,3]
+
+# 125. Valid Palindorme
+class Solution:
+    def isPalindrome(self, s):
+        # check if char is an alphanumeric character or not, and then convert them to lowercases. 
+        # .isalnum() can check if the string is written in alphanumeric or not.
+        characters = [char.lower() for char in s if char.isalnum()]
+        
+        # compare front and back halves
+        for i in range(len(characters) // 2):
+            if characters[i] != characters[-(i + 1)]:
+                return False
+        return True
+
+sol = Solution()
+print(sol.isPalindrome("A man, a plan, a canal: Panama"))  
+print(sol.isPalindrome("race a car"))                      
+print(sol.isPalindrome(" "))
 val = 3
 k = removeElement(nums, val)
 print(nums[:k])
