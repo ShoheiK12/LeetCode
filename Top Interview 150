@@ -204,3 +204,43 @@ solution = Solution()
 result = solution.longestCommonPrefix(["flow", "flower", "flex"])
 
 print(result)
+
+# 125. Valid Palindrome
+class Solution:
+    def isPalindrome(self, s):
+        # check if char is an alphanumeric character or not, and then convert them to lowercases. 
+        # .isalnum() can check if the string is written in alphanumeric or not.
+        characters = [char.lower() for char in s if char.isalnum()]
+        
+        # compare front and back halves
+        for i in range(len(characters) // 2):
+            if characters[i] != characters[-(i + 1)]:
+                return False
+        return True
+
+sol = Solution()
+print(sol.isPalindrome("A man, a plan, a canal: Panama"))  
+print(sol.isPalindrome("race a car"))                      
+print(sol.isPalindrome(" ")) 
+
+# 392. Is Subsequence
+class Solution:
+    def isSubsequence(self, s, t):
+        # set up pointer to check t
+        t_index = 0  
+
+        for char in s:
+            # keep looking for char until you find char in t
+            while t_index < len(t) and t[t_index] != char:
+                t_index += 1
+            # return False unless you find char in t
+            if t_index == len(t):
+                return False
+            # add one to t_index for next search
+            t_index += 1
+        
+        return True
+
+sol = Solution()
+print(sol.isSubsequence("ace", "abcde"))  # True
+print(sol.isSubsequence("aec", "abcde"))  # False
