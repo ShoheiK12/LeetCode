@@ -7,6 +7,7 @@ How to solve?
 2. If a digit is 9, 9 will be 0 (9+1=10) and carry over(go to the next digit).
 3. If all digits are 9, extra 1 at the front of 0s (999 → 1000).
 """
+
 class Solution(object):
     def plusOne(self, digits):
         """
