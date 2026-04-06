@@ -68,3 +68,45 @@ class Solution(object):
                 right = mid - 1
         # When the loop finishes, right will be the largest integer that does not exceed x.
         return right
+        
+# 70. Climbing Stairs
+"""
+How to solve?
+1. Fibonacci sequence
+-> The number of ways to n = the number of way to n-1 + the numner of way to n+1 
+-> Add the previous two to get the current number = Fibonacci sequence
+2. if n = 1 or 2, return n.
+3. Set up variables for fibonacci sequence
+-> prev2 = 1 way to n-2. prev1 = 2 ways to n-1.
+-> Ex: n = 3. prev2(n-2) is 1st-stair, so only 1 way to 1st-stair.
+       prev1(n-1) is 2nd-stair, so 2 ways("1 step and 1 step" or "2 steps") to 2nd-stair.
+4. Calculate from 3td-stair to the goal
+-> current = prev1 + prev2 (Fibonacci sequence)
+-> renew prev2 and prev1. For next step, prev1 = current, prev2 = prev1.
+
+Runtime is O(n) because of one for-loop depending on n.
+"""
+
+class Solution(object):
+    def climbStairs(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        # Return n if n = 1 or 2
+        if n <= 2:
+            return n
+        
+        # Fibonacci sequence
+        # prev2: n-2, prev1: n-1
+        prev2 = 1
+        prev1 = 2
+        
+        # Calculate from 3td-stair to the goal
+        for i in range(3, n + 1):
+            current = prev1 + prev2
+            # Renew variables for nex calculation
+            prev2 = prev1
+            prev1 = current    
+        # Return prev1 because prev1 = current
+        return prev1
