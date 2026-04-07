@@ -118,6 +118,8 @@ How to solve?
 2. Loop by the end of list
 -> We need to check current and current.next
 -> Because if we don't check current.next (only while current), it will cause an error when checking the last node. 
+
+Runtime is O(n).
 """
 
 # Definition for singly-linked list.
@@ -137,7 +139,7 @@ class Solution(object):
         # Set up pointer, as "current"
         current = head
 
-        # Loop by the end of list
+        # Loop until the end of list
         while current and current.next:
             # If current value = next value of current, skip the next -> current.next = current.next.next
             if current.val == current.next.val:
@@ -147,3 +149,80 @@ class Solution(object):
                 current = current.next
         
         return head
+
+# 88. Merge Sorted Array
+# Answer 1
+"""
+How to solve?
+1. Merge nums1 (only the first m elements) and nums2, and then sort it.
+2. The final sorted array must be stored inside nums1.
+-> We copy each element from 'merged' back into 'nums1' to satisfy the in-place requirement.
+
+Runtime is O(n log n).
+"""
+
+class Solution(object):
+    def merge(self, nums1, m, nums2, n):
+        """
+        :type nums1: List[int]
+        :type m: int
+        :type nums2: List[int]
+        :type n: int
+        :rtype: None Do not return anything, modify nums1 in-place instead.
+        """
+        # Merge nums1 and nums2,and then sort it.
+        merged = sorted(nums1[:m] + nums2)
+    
+        # The final sorted array
+        for i in range(m + n):
+            nums1[i] = merged[i]
+
+# Answer 2
+"""
+How to solve?
+1. Put elements backward in nums1
+-> If we put elements forward in nums1, the original elements in nums1 will be updated.
+-> It means that we need to copy original nums1 to avoid this update.
+-> But, If putting elements backward, we don't care about update. 
+=> Line them up from biggest to smallest, starting from the back.
+2. Set ip three pointers for the last element nums1, nums2, and the last position of nums1.
+-> Why setting up them for the last elements? Because this list is ascending order.
+3. Compare the element of p1 and the element of p2. 
+-> Put bigger element in the end of nums1 (= p).
+
+Runtime is O(n).
+"""
+
+class Solution(object):
+    def merge(self, nums1, m, nums2, n):
+        """
+        :type nums1: List[int]
+        :type m: int
+        :type nums2: List[int]
+        :type n: int
+        :rtype: None Do not return anything, modify nums1 in-place instead.
+        """
+        # Set up tree pinters
+        p1 = m - 1      # the end of num1 without 0s.
+        p2 = n - 1      # the end of num2.
+        p = m + n - 1   # the end of original nums1 = num1 with 0s.
+
+        # Loop if p1 and p2 >= 0. 
+        while p1 >= 0 and p2 >= 0:
+            # If nums1 > nums2, put nums1[p1] in the end of priginal nums1
+            if nums1[p1] > nums2[p2]:
+                nums1[p] = nums1[p1]
+                # Put next number after p1.
+                p1 -= 1
+            # If nums2 > nums1, put nums2[p2] in the end of priginal nums1
+            else:
+                nums1[p] = nums2[p2]
+                # Put next number after p2.
+                p2 -= 1
+            p -= 1
+
+        # In case elements still remians in nums2 and nums1 finish first.
+        while p2 >= 0:
+            nums1[p] = nums2[p2]
+            p2 -= 1
+            p -= 1
