@@ -110,3 +110,40 @@ class Solution(object):
             prev1 = current    
         # Return prev1 because prev1 = current
         return prev1
+
+# 83. Remove Duplicates from Sorted List
+"""
+How to solve?
+1. Set up pointer
+2. Loop by the end of list
+-> We need to check current and current.next
+-> Because if we don't check current.next (only while current), it will cause an error when checking the last node. 
+"""
+
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def deleteDuplicates(self, head):
+        """
+        :type head: Optional[ListNode]
+        :rtype: Optional[ListNode]
+        """
+        # If list is empty or only one element in the list, return head
+        if not head:
+            return head
+        # Set up pointer, as "current"
+        current = head
+
+        # Loop by the end of list
+        while current and current.next:
+            # If current value = next value of current, skip the next -> current.next = current.next.next
+            if current.val == current.next.val:
+                current.next = current.next.next
+            # If the values are different, move pointer(current)
+            else:
+                current = current.next
+        
+        return head
