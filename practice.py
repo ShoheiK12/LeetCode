@@ -226,3 +226,43 @@ class Solution(object):
             nums1[p] = nums2[p2]
             p2 -= 1
             p -= 1
+
+# 94. Binary Tree Inorder Traversal
+"""
+How to solve?
+1. To perform an Inorder Traversal, we visit the nodes in a specific order: Left → Root → Right.
+2. Use recursion.
+-> A tree is a recursive data structure. Recursion naturally mimics this structure by applying the same logic to each subtree.
+"""
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def inorderTraversal(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: List[int]
+        """
+        # Make an empty list to store the result.
+        result = []
+
+        # Visit node recursively
+        def helper(node):
+            if not node:
+                return
+
+            # Search left node first
+            helper(node.left)
+
+            # Append the value if cannot moving any further to the left
+            result.append(node.val)
+
+            # Search right node
+            helper(node.right)
+            
+        helper(root)
+        
+        return result
