@@ -233,7 +233,10 @@ How to solve?
 1. To perform an Inorder Traversal, we visit the nodes in a specific order: Left → Root → Right.
 2. Use recursion.
 -> A tree is a recursive data structure. Recursion naturally mimics this structure by applying the same logic to each subtree.
+
+Runtime is O(n).
 """
+
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, val=0, left=None, right=None):
@@ -266,3 +269,36 @@ class Solution(object):
         helper(root)
         
         return result
+
+# 100. Same Tree
+"""
+How to solve?
+1. We need to check both nodes are same.
+-> If both of nodes are None, it means same.
+-> If either node is None or has diffrent values,  not same.
+2. When both nodes are not None and have same values, check each left node and each right node recursively.
+"""
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def isSameTree(self, p, q):
+        """
+        :type p: Optional[TreeNode]
+        :type q: Optional[TreeNode]
+        :rtype: bool
+        """
+        # 1. If both of nodes are None, return True.
+        if not p and not q:
+            return True
+        
+        # 2. If either node is None or has different values, return False
+        if not p or not q or p.val != q.val:
+            return False
+        
+        # 3. When both nodes are not None and have same values, check left and right recursively. 
+        # If both of conditions are True, return True.
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
