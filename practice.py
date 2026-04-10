@@ -277,6 +277,8 @@ How to solve?
 -> If both of nodes are None, it means same.
 -> If either node is None or has diffrent values,  not same.
 2. When both nodes are not None and have same values, check each left node and each right node recursively.
+
+Runtime is O(n).
 """
 # Definition for a binary tree node.
 # class TreeNode(object):
@@ -302,3 +304,44 @@ class Solution(object):
         # 3. When both nodes are not None and have same values, check left and right recursively. 
         # If both of conditions are True, return True.
         return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+
+# 101. Symmentric Tree
+"""
+How to solve?
+1. check whether it is a mirror of itself.
+= check outside of whole tree (left of left subtree = right of right subtree) and inside og whole tree (left of right subtree = right of left subtree).
+
+Runtime is O(n).
+"""
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def isSymmetric(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: bool
+        """
+        # if no nodes in whole tree, it means symmetric.
+        if not root:
+            return True
+        
+        return self.isMirror(root.left, root.right)
+
+    def isMirror(self, left, right):
+        # 1. If both of left and right subtrees are empty, it means symmetric.
+        if not left and not right:
+            return True
+        
+        # 2. If either left or right subtree is empty, or the values are different, it means not symmetric.
+        if not left or not right or left.val != right.val:
+            return False
+        
+        # 3. Otherwise, check left and right tree recursively
+        # left of left subtree = right of right subtree
+        # and left of right subtree = right of left subtree
+        return self.isMirror(left.left, right.right) and self.isMirror(left.right, right.left)
+
