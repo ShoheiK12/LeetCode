@@ -345,3 +345,85 @@ class Solution(object):
         # and left of right subtree = right of left subtree
         return self.isMirror(left.left, right.right) and self.isMirror(left.right, right.left)
 
+# 104. Maximum Depth of Binary Tree
+"""
+How to solve?
+1. Calculate the depth of the left subtree and the right subtree respectively, 
+then add 1 (for the current level) to the greater of the two.
+
+Runtime is O(n).
+"""
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def maxDepth(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: int
+        """
+        # 1. If nodes are empty, return 0.
+        if not root:
+            return 0
+        
+        # 2. See the max depth of left subtrees.
+        left_depth = self.maxDepth(root.left)
+        
+        # 3. See the max depth of right subtrees.
+        right_depth = self.maxDepth(root.right)
+        
+        # 4.  Add one (parent nodes) to the maximum depth of the left and right subtrees.
+        return max(left_depth, right_depth) + 1
+
+# 108. Convert Sorted Array to Binary Search Tree
+"""
+How to solve?
+1. The rule for BST is that values to the left must be smaller than the parent, and values to the right must be larger than the parent.
+-> Since the array(list) is already sorted in ascending order, choosing the middle value as the parent results in:
+The smaller numbers are on the left, and the larger numbers are on the right. Those are divided exactly in half.
+2. Divide the array(list) into left, midpoint and right.
+-> The midpoint nums[len(nums)//2] must be the root node of nums, becuase nums is a sorted list.
+3. Create the TreeNode using the midpoint value.
+4. Recursion. 
+Pass the left half of the list to sortedArrayToBST to build the left subtree. Do the same for the right half of the list to build the right subtree.
+5. Connect the returned left subtrees and right subtrees to the current node (root.left, root.right).
+
+Runtime is O(n).
+Space complexity is O(log n).
+"""
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def sortedArrayToBST(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: Optional[TreeNode]
+        """
+        # 1. If the list is empty, return None.
+        if not nums:
+            return None
+        
+        # 2. Find midpoint index of the list.
+        mid = len(nums) // 2
+        
+        # 3. Create a parent node using midpoint value.
+        root = TreeNode(nums[mid])
+        
+        # 4. Create left subtrees recursively using left elements from the midpoint.
+        root.left = self.sortedArrayToBST(nums[:mid])
+        
+        # 5. Create right subtrees recursively using right elements from the midpoint.
+        root.right = self.sortedArrayToBST(nums[mid + 1:])
+        
+        # 6. Return tthe whole tree
+        return root
+
