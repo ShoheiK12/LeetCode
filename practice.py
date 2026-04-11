@@ -423,7 +423,53 @@ class Solution(object):
         
         # 5. Create right subtrees recursively using right elements from the midpoint.
         root.right = self.sortedArrayToBST(nums[mid + 1:])
-        
-        # 6. Return tthe whole tree
+
+        # 6. Return the whole tree
         return root
+
+# 110. Balanced Binary Tree
+"""
+How to solve?
+1. Height-balanced tree means the height difference between the left and right subtrees is at most 1 for every node.
+2. If balanced, return the height. If unbalanced, return -1.
+3. Get the height of left and right subtrees. 
+-> If the subtree is unbalanced, return -1. 
+4. If both subtrees are balanced, calculate the remainder of the height of both left and right subtrees.
+
+Runtime is O(n).
+"""
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def isBalanced(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: bool
+        """
+        return self.checkHeight(root) != -1
+
+    def checkHeight(self, node):
+        # 1. If node is empty, the height is 0.
+        if not node:
+            return 0
+        
+        # 2. Get the height of left subtree
+        left_h = self.checkHeight(node.left)
+        if left_h == -1: return -1  # If find unbalance in left subtree, then -1.
+        
+        # 3. Get the height of right subtree
+        right_h = self.checkHeight(node.right)
+        if right_h == -1: return -1 # If find unbalance in left subtree, then -1.
+        
+        # 4. Check if the whole tree is unbalance or not.
+        # If the remainder is greater than 1, return -1 = unbalanced
+        if abs(left_h - right_h) > 1:
+            return -1
+
+        
+        
 
