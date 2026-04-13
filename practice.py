@@ -1,6 +1,8 @@
 # Level: easy
 
-# 66 Plus one
+# 58. Length of Last Word
+
+# 66. Plus one
 """
 How to solve?
 1. If the last digit is not 9, +1 to the last digit.
