@@ -1,6 +1,9 @@
 # Level: easy
 
 # 58. Length of Last Word
+"""
+How to solve?
+"""
 
 # 66. Plus one
 """
