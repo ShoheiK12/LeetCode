@@ -3,7 +3,28 @@
 # 58. Length of Last Word
 """
 How to solve?
+1. Split string with empty space.
+2. Check the length of the last word.
+
+Runtime is O(n).
 """
+
+class Solution(object):
+    def lengthOfLastWord(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        # split string with empty space
+        words = s.split()
+        # check only the length of the last word
+        if words:
+          length = len(words[-1])
+        # if string is empty, length is 0 (prevent IndexError)
+        else:
+          length = 0  
+
+        return length
 
 # 66. Plus one
 """
