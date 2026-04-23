@@ -1,11 +1,67 @@
 # Level: easy
 
 # 35. Search Insert Position
+"""
+How to solve?
+1. Use binary search.
+2. Set midpoint.
+3. If midpoint < target, move left foward. 
+If midpoint >=target, move right backward.
+4. Repeat 2 and 3 until we find the target.
+5. If not found, left is the insertion point.
+
+Runtime is O(log n).
+"""
+
+class Solution(object):
+    def searchInsert(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        left = 0
+        right = len(nums) - 1
+
+        while left <= right:
+            mid = (left + right) // 2
+
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+
+        # If not found, 'left' is the insertion point
+        return left
 
 # 58. Length of Last Word
 """
 How to solve?
+1. Split string by ""
+-> split("") causes ValueError: empty separator.
+2. Check only the length of the last word.
+
+Runtime is O(n).
 """
+
+class Solution(object):
+    def lengthOfLastWord(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        # split string with empty space
+        words = s.split()
+        # check only the length of the last word
+        if words:
+          length = len(words[-1])
+        # if string is empty, length is 0 (prevent IndexError)
+        else:
+          length = 0  
+
+        return length
 
 # 66. Plus one
 """
