@@ -1,5 +1,36 @@
 # Level: easy
 
+# 28. Find the index of the First Occurrence in a String
+"""
+How to solve?
+1. Check the needle in haystack.
+-> range(n-m+1): Find the right position to fit the needle size.
+-> Ex: haystack=abcdef, needle=cd -> i=0:ab, i=1:bc,i=2:cd,i=3:de,i=4:ef,i=5:NG(When i=5, cannot check 2 words (= the length of needle)).
+-> Therefore, 6-2+1=5, for i in range(5) = i=0,1,2,3,4.
+2. Compare the substring of haystack using slice.
+-> Ex: haystack=abcdef, needle=cd -> haystack[0:0+2] -> ab != cd, haystack[1:1+2] -> bc != cd, haystack[2:2+2] -> cd == cd.
+
+Runtime is O(n).
+"""
+
+class Solution(object):
+    def strStr(self, haystack, needle):
+        """
+        :type haystack: str
+        :type needle: str
+        :rtype: int
+        """
+        n = len(haystack)
+        m = len(needle)
+
+        # Loop through possible starting indices
+        for i in range(n - m + 1):
+            # Check substring match
+            if haystack[i:i + m] == needle:
+                return i
+
+        return -1
+
 # 35. Search Insert Position
 """
 How to solve?
