@@ -1,5 +1,32 @@
 # Level: easy
 
+# 27. Remove Element
+"""
+How to solve?
+1. Check if the element is the same as val.
+2. If not same, keep this element in the list. Otherwise, remove it from the list.
+
+Runtime is O(n).
+"""
+
+class Solution(object):
+    def removeElement(self, nums, val):
+        """
+        :type nums: List[int]
+        :type val: int
+        :rtype: int
+        """
+        # Initialise k
+        k = 0
+
+        # Check if the element is the same as val using for-loop.
+        for i in range(len(nums)):
+            # if not, keep the element in the list. Otherwise, remove it from the list.
+            if nums[i] != val:
+                nums[k] = nums[i]
+                k += 1
+        return k
+
 # 28. Find the index of the First Occurrence in a String
 """
 How to solve?
