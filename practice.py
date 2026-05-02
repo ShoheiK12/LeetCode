@@ -1,5 +1,32 @@
 # Level: easy
 
+# 26. Remove Duplicates from Sorted Array
+"""
+How to solve?
+1. Check nums[j] is unique or not.
+2. If unique,  nums[i] = nums[j] and return the number of unique elements in nums.
+
+Runtime is O(n).
+"""
+
+class Solution(object):
+    def removeDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        # start with 1 because nums[0] is always unique
+        i = 1
+
+        for j in range(1, len(nums)):
+            # check if nums[j] is unique to previous num
+            if nums[j] != nums[j - 1]:
+                nums[i] = nums[j]
+                i += 1
+
+        # return i as the number of unique elements in nums.
+        return i
+
 # 27. Remove Element
 """
 How to solve?
