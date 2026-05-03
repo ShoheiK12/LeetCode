@@ -1,5 +1,45 @@
 # Level: easy
 
+# 21. Merge Two Sorted Lists
+"""
+How to solve?
+1. Initialize a dummy node
+2. Compare and Link
+3. Attach remainder
+
+Runtime is O(n+m).
+"""
+
+class Solution(object):
+    def mergeTwoLists(self, list1, list2):
+        """
+        :type list1: Optional[ListNode]
+        :type list2: Optional[ListNode]
+        :rtype: Optional[ListNode]
+        """
+        # Make start-point for merged list
+        dummy = ListNode(0)
+        # Pointer for the tail of merged list
+        current = dummy
+
+        # Compare list1 value and list2 value
+        # Add smaller value to merged list and move a pointer forward.
+        while list1 and list2:
+            if list1.val <= list2.val:
+                current.next = list1
+                list1 = list1.next
+            else:
+                current.next = list2
+                list2 = list2.next
+            current = current.next
+
+        if list1:
+            current.next = list1
+        else:
+            current.next = list2
+
+        return dummy.next
+
 # 26. Remove Duplicates from Sorted Array
 """
 How to solve?
