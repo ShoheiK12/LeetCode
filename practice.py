@@ -1,5 +1,26 @@
 # Level: easy
 
+# 1. Two Sum
+"""
+How to solve?
+1. Use two for-loops to fix the first num and the second num.
+2. Check if nums[1] + nums[j] == target.
+
+Runtime is O(n^2).
+"""
+
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        for i in range(len(nums)):
+            for j in range(i + 1, len(nums)):
+                if nums[i] + nums[j] == target:
+                    return i, j
+
 # 21. Merge Two Sorted Lists
 """
 How to solve?
