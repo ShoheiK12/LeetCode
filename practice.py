@@ -21,6 +21,29 @@ class Solution(object):
                 if nums[i] + nums[j] == target:
                     return i, j
 
+# 9. Palindrome Number
+"""
+How to solve?
+1. Covert x into string and put it in list.
+2. Check palindrome comparing digits[i] != digits[-(i + 1)].
+
+Runtime is O(n).
+"""
+
+class Solution(object):
+    def isPalindrome(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+        digits = list(str(x))
+
+        for i in range(len(digits) // 2):
+            if digits[i] != digits[-(i + 1)]:
+                return False
+
+        return True
+
 # 21. Merge Two Sorted Lists
 """
 How to solve?
