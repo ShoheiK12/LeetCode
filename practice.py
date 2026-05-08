@@ -44,6 +44,49 @@ class Solution(object):
 
         return True
 
+# 13. Roman to Integer
+"""
+How to solve?
+1. Make a dictionary to store Roman numbers and value.
+2. Check string backwards (from right to left)
+-> If we check string forwards (from left to right), we need to check i+1 (= need to check Index Out of Bounds).
+-> If checking backwards, just check the next char, and if smaller, -1. Otherwise, +1. 
+
+Runtime is O(n). Because we check string only once, so runtime depends on the length of string.
+"""
+
+class Solution(object):
+    def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        roman_dict = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000
+        }
+
+        total = 0
+        prev_value = 0
+
+        # check string backwards so that we can calculate easily.
+        for char in reversed(s):
+            value = roman_dict[char]
+            # if value < prev_value, substarct
+            if value < prev_value:
+                total -= value
+            # if value > prev_value, add and renew prev_value
+            else:
+                total += value
+                prev_value = value
+
+        return total
+
 # 21. Merge Two Sorted Lists
 """
 How to solve?
