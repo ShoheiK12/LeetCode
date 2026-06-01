@@ -87,6 +87,35 @@ class Solution(object):
 
         return total
 
+# 14. Longest Common Prefix
+"""
+How to solve?
+1. Set up loop time based on shotest string.
+2. Check characters using index.
+"""
+
+class Solution(object):
+    def longestCommonPrefix(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: str
+        """
+        # if strs are empty, return ""
+        if not strs:
+            return ""
+        
+        # set up shotest string in the strs based on length
+        shortest_str = min(strs, key=len)
+        
+        for i in range(len(shortest_str)):
+            # check if the prefix of shortest string is the same or not one by one
+            for string in strs:
+              # if prefix is not same, then return prefix to the same position.
+                if string[i] != shortest_str[i]:
+                    return shortest_str[:i]
+        # if shortest string is prefilx, return this string.
+        return shortest_str  
+
 # 21. Merge Two Sorted Lists
 """
 How to solve?
