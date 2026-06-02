@@ -116,6 +116,44 @@ class Solution(object):
         # if shortest string is prefilx, return this string.
         return shortest_str  
 
+20. Valid Parentheses
+"""
+How to solve?
+1. Prepare for empty stack
+2. Prepare for bracket_map 
+3. If char == ( or { or [, append char to stack.
+4. if char == ) or } or ], go to else clause.
+-> 4.1 If corresponding bracket is not in stack, return False.
+-> 4.2 (When stack is not empty,) Pick up top of the stack = the last char in stack (LIFO).
+-> 4.3 If different type of brancket, return False.
+5. Return not stack = If stack is empty, return True. Otherwise, return False.
+"""
+
+class Solution(object):
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        stack = []
+        bracket_map = {
+            ')': '(',
+            '}': '{',
+            ']': '['
+        }
+
+        for char in s:
+            if char in bracket_map.values():
+                stack.append(char)
+            else:
+                if not stack:
+                    return False
+                top = stack.pop()
+                if bracket_map[char] != top:
+                    return False
+
+        return not stack
+
 # 21. Merge Two Sorted Lists
 """
 How to solve?
