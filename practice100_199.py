@@ -199,3 +199,40 @@ class Solution(object):
         # If the remainder is greater than 1, return -1 = unbalanced
         if abs(left_h - right_h) > 1:
             return -1
+            
+# 111. Minimum depth of Binary Tree
+"""
+How to solve?
+1. This question asks the number of nodes.
+-> Ex: 3(parent)->9(left child)&20(right child) -> The min depth is 2.
+2. Use recursion.
+3. (When nodes have both left and right children)The min depth is 1 (current node) + min(self.minDepth(root.left),self.minDepth(root.right))
+4. (When nodes have either left or right children(one side is empty)) 3 equation does not suit this case.
+-> Ex: 3(parent)->empty(left child)&20(right child) -> If use this equation, 1 + min(0,1) = 1 + 0 = 1. But, the answer is 2 because there are 2 nodes.
+5. In case 4, the min depth means the number of nodes that exist in this tree. 
+-> So, if either side is empty, this empty side should be ignored = Check the only node that exists in the tree in case of empty nodes. 
+"""
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def minDepth(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: int
+        """
+        if not root:
+            return 0
+
+        if not root.left:
+            return 1 + self.minDepth(root.right)
+
+        if not root.right:
+            return 1 + self.minDepth(root.left)
+
+        return 1 + min(self.minDepth(root.left),
+                       self.minDepth(root.right))
