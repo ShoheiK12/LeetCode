@@ -210,7 +210,9 @@ How to solve?
 4. (When nodes have either left or right children(one side is empty)) 3 equation does not suit this case.
 -> Ex: 3(parent)->empty(left child)&20(right child) -> If use this equation, 1 + min(0,1) = 1 + 0 = 1. But, the answer is 2 because there are 2 nodes.
 5. In case 4, the min depth means the number of nodes that exist in this tree. 
--> So, if either side is empty, this empty side should be ignored = Check the only node that exists in the tree in case of empty nodes. 
+-> So, if either side is empty, this empty side should be ignored = Check the only node that exists in the tree in case of empty nodes.
+
+Runtime is O(n).
 """
 
 # Definition for a binary tree node.
@@ -233,6 +235,42 @@ class Solution(object):
 
         if not root.right:
             return 1 + self.minDepth(root.left)
-
+            
         return 1 + min(self.minDepth(root.left),
                        self.minDepth(root.right))
+
+# 112. Path Sum
+"""
+How to solve?
+1. Check the value of node one by one.
+-> Use recursion.
+2. If no tree (empty list), return false.
+3. When reach to leaf node (root.left == None and root.right == None), check if root.val (leaf node) == tragetSum.
+-> If root.val == tragetSum, return True. Otherwise return false.
+4. When on the way to leaf node, go to targetSum -= root.val to reduce the sum.
+5. Set up self.hasPathSum(root.left, targetSum) or self.hasPathSum(root.right, targetSum) for next node (Recursion).
+"""
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def hasPathSum(self, root, targetSum):
+        """
+        :type root: Optional[TreeNode]
+        :type targetSum: int
+        :rtype: bool
+        """
+        if not root:
+            return False
+
+        if not root.left and not root.right:
+            return root.val == targetSum
+
+        targetSum -= root.val
+
+        return (self.hasPathSum(root.left, targetSum) or
+                self.hasPathSum(root.right, targetSum))
