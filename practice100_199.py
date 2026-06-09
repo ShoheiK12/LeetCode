@@ -10,6 +10,7 @@ How to solve?
 
 Runtime is O(n).
 """
+
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, val=0, left=None, right=None):
@@ -43,6 +44,7 @@ How to solve?
 
 Runtime is O(n).
 """
+
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, val=0, left=None, right=None):
